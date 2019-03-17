@@ -1,4 +1,4 @@
-let PrivateWindow = new Promise(function (resolve, reject) {
+var PrivateWindow = new Promise(function (resolve, reject) {
 	try {
 		var isSafari = navigator.vendor && navigator.vendor.indexOf('Apple') > -1 &&
 			   navigator.userAgent &&
