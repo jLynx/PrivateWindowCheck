@@ -40,10 +40,11 @@
 	<script src='PrivateWindowCheck.js'></script>
 </head>
 <body>
+	<div id="result">Loading...</div>
+	
 	<script>
 	isPrivateWindow(function(is_private) {
-		document.getElementById('result').innerHTML = typeof is_private === 'undefined' ? 'cannot detect' : is_private ? 'private <span>👻</span>' : 'not private <span>🖐️</span>';
+		document.getElementById('result').innerHTML = is_private === null ? 'cannot detect' : is_private ? 'private <span>👻</span>' : 'not private <span>🖐️</span>';
 	});
 	</script>
-	<div id="result">Loading...</div>
 </body>
