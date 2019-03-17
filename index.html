@@ -1,2 +1,33 @@
 <script src='PrivateWindowCheck.js'></script>
-<h1>hello</h1>
+<style>
+body{
+  padding-top: 2rem;
+  text-align: center;
+}
+
+@keyframes hi {
+    0% { transform: rotate(20deg); }
+    50% { transform: rotate(0deg); }
+    100% { transform: rotate(20deg); }
+}
+
+#result{
+  font-family: monospace;
+  position: relative;
+  font-size: 20px;
+}
+
+#result span{
+  transform-origin: center bottom;
+  position: absolute;
+  top: -2px;
+  animation: hi 1s linear 0s infinite;
+}
+</style>
+
+<script>
+isPrivateWindow(function(is_private) {
+	document.getElementById('result').innerHTML = typeof is_private === 'undefined' ? 'cannot detect' : is_private ? 'private <span>👻</span>' : 'not private <span>🖐️</span>';
+});
+</script>
+<div id="result"></div>

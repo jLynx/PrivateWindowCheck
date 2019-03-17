@@ -10,8 +10,7 @@ let PrivateWindow = new Promise(function (resolve, reject) {
 			if(!window.indexedDB && (window.PointerEvent || window.MSPointerEvent))
 				resolve(true);
 			resolve(false);
-		// } else if(navigator.userAgent.includes("ORP") || navigator.userAgent.includes("Chrome")) {
-		}  else {
+		}  else {	//Normally ORP or Chrome
 			//Other
 			const fs = window.RequestFileSystem || window.webkitRequestFileSystem;
 			if (!fs) resolve(null);
@@ -23,6 +22,9 @@ let PrivateWindow = new Promise(function (resolve, reject) {
 	}
 });
 
-PrivateWindow.then(function(value) {
-  console.log(value);
-});
+function isPrivateWindow(callback) {
+	PrivateWindow.then(function(is_private) {
+		callback(is_private);
+		console.log(is_private);
+	});
+}
