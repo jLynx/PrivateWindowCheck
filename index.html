@@ -1,33 +1,45 @@
-<script src='PrivateWindowCheck.js'></script>
-<style>
-body{
-  padding-top: 2rem;
-  text-align: center;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Am I useing a private window?</title>
+	<script src='PrivateWindowCheck.js'></script>
+	<style>
+	body{
+	  padding-top: 2rem;
+	  text-align: center;
+	}
+	span {
+	  font-family: "Segoe UI Symbol";
+	}
 
-@keyframes hi {
-    0% { transform: rotate(20deg); }
-    50% { transform: rotate(0deg); }
-    100% { transform: rotate(20deg); }
-}
+	@keyframes hi {
+		0% { transform: rotate(20deg); }
+		50% { transform: rotate(0deg); }
+		100% { transform: rotate(20deg); }
+	}
 
-#result{
-  font-family: monospace;
-  position: relative;
-  font-size: 20px;
-}
+	#result{
+	  font-family: monospace;
+	  position: relative;
+	  font-size: 20px;
+	}
 
-#result span{
-  transform-origin: center bottom;
-  position: absolute;
-  top: -2px;
-  animation: hi 1s linear 0s infinite;
-}
-</style>
-
-<script>
-isPrivateWindow(function(is_private) {
-	document.getElementById('result').innerHTML = typeof is_private === 'undefined' ? 'cannot detect' : is_private ? 'private <span>👻</span>' : 'not private <span>🖐️</span>';
-});
-</script>
-<div id="result"></div>
+	#result span{
+	  transform-origin: center bottom;
+	  position: absolute;
+	  top: -2px;
+	  animation: hi 1s linear 0s infinite;
+	}
+	</style>
+</head>
+<body>
+	<script>
+	isPrivateWindow(function(is_private) {
+		document.getElementById('result').innerHTML = typeof is_private === 'undefined' ? 'cannot detect' : is_private ? 'private <span>👻</span>' : 'not private <span>🖐️</span>';
+	});
+	</script>
+	<div id="result">Loading...</div>
+</body>
