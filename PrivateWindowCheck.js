@@ -30,7 +30,7 @@ let PrivateWindow = new Promise(function (resolve, reject) {
 
 function isPrivateWindow(callback) {
 	PrivateWindow.then(function(is_private) {
-		callback(is_private);
 		console.log(is_private);
+		callback(is_private);
 	});
 }
