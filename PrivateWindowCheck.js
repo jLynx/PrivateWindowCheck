@@ -1,16 +1,32 @@
 let PrivateWindow = new Promise(function (resolve, reject) {
 	try {
+		var isSafari = navigator.vendor && navigator.vendor.indexOf('Apple') > -1 &&
+			   navigator.userAgent &&
+			   navigator.userAgent.indexOf('CriOS') == -1 &&
+			   navigator.userAgent.indexOf('FxiOS') == -1;
+				   
 		if(navigator.userAgent.includes("Firefox")){
 			//Firefox
 			var db = indexedDB.open("test");
 			db.onerror = function(){resolve(true);};
 			db.onsuccess =function(){resolve(false);};
-		}  else if(navigator.userAgent.includes("Edge") || navigator.userAgent.includes("Trident") || navigator.userAgent.includes("msie")){
+		} else if(navigator.userAgent.includes("Edge") || navigator.userAgent.includes("Trident") || navigator.userAgent.includes("msie")){
 			//Edge or IE
 			if(!window.indexedDB && (window.PointerEvent || window.MSPointerEvent))
 				resolve(true);
 			resolve(false);
-		}  else {	//Normally ORP or Chrome
+		} else if(isSafari){
+			//Safari
+			var storage = window.sessionStorage;
+			try {
+				storage.setItem("someKeyHere", "test");
+				storage.removeItem("someKeyHere");
+				resolve(false);
+			} catch (e) {
+				if (e.code === DOMException.QUOTA_EXCEEDED_ERR && storage.length === 0) 
+					resolve(true);
+			}
+		} else {	//Normally ORP or Chrome
 			//Other
 			const fs = window.RequestFileSystem || window.webkitRequestFileSystem;
 			if (!fs) resolve(null);
