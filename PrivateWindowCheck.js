@@ -14,7 +14,13 @@ let PrivateWindow = new Promise(function (resolve, reject) {
 			//Other
 			const fs = window.RequestFileSystem || window.webkitRequestFileSystem;
 			if (!fs) resolve(null);
-			else fs(window.TEMPORARY, 100, ()=>resolve(false), ()=>resolve(true));
+			else {
+				fs(window.TEMPORARY, 100, function(fs) {
+					resolve(false);
+				}, function(err) {
+					resolve(true);
+				});
+			}
 		}
 	}
 	catch(err) {
