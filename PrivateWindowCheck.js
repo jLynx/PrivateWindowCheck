@@ -5,7 +5,7 @@ let PrivateWindow = new Promise(function (resolve, reject) {
 			var db = indexedDB.open("test");
 			db.onerror = function(){resolve(true);};
 			db.onsuccess =function(){resolve(false);};
-		}  else if(navigator.userAgent.includes("Edge") || navigator.userAgent.includes("Trident")){
+		}  else if(navigator.userAgent.includes("Edge") || navigator.userAgent.includes("Trident") || navigator.userAgent.includes("msie")){
 			//Edge or IE
 			if(!window.indexedDB && (window.PointerEvent || window.MSPointerEvent))
 				resolve(true);
@@ -24,6 +24,7 @@ let PrivateWindow = new Promise(function (resolve, reject) {
 		}
 	}
 	catch(err) {
+		console.log(err);
 		resolve(null);
 	}
 });
