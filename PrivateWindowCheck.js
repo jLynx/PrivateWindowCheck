@@ -7,15 +7,19 @@ var PrivateWindow = new Promise(function (resolve, reject) {
 				 
 		if(isSafari){
 			//Safari
-			var storage = window.sessionStorage;
+			var e = false;
+			if (window.safariIncognito) {
+				e = true;
+			} else {
 			try {
-				storage.setItem("someKeyHere", "test");
-				storage.removeItem("someKeyHere");
+				window.openDatabase(null, null, null, null);
+				window.localStorage.setItem("test", 1)
 				resolve(false);
-			} catch (e) {
-				if (e.code === DOMException.QUOTA_EXCEEDED_ERR && storage.length === 0) 
-					resolve(true);
+			} catch (t) {
+				e = true;
+				resolve(true); 
 			}
+			void !e && (e = !1, window.localStorage.removeItem("test"))
 		} else if(navigator.userAgent.includes("Firefox")){
 			//Firefox
 			var db = indexedDB.open("test");
