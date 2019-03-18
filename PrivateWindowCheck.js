@@ -11,15 +11,16 @@ var PrivateWindow = new Promise(function (resolve, reject) {
 			if (window.safariIncognito) {
 				e = true;
 			} else {
-			try {
-				window.openDatabase(null, null, null, null);
-				window.localStorage.setItem("test", 1)
-				resolve(false);
-			} catch (t) {
-				e = true;
-				resolve(true); 
+				try {
+					window.openDatabase(null, null, null, null);
+					window.localStorage.setItem("test", 1)
+					resolve(false);
+				} catch (t) {
+					e = true;
+					resolve(true); 
+				}
+				void !e && (e = !1, window.localStorage.removeItem("test"))
 			}
-			void !e && (e = !1, window.localStorage.removeItem("test"))
 		} else if(navigator.userAgent.includes("Firefox")){
 			//Firefox
 			var db = indexedDB.open("test");
