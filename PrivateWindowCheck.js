@@ -1,3 +1,26 @@
+async function chrome76Detection() {
+	if ('storage' in navigator && 'estimate' in navigator.storage) {
+		const {usage, quota} = await navigator.storage.estimate();
+		if(quota < 120000000)
+			return true;
+		else
+			return false;
+	} else {
+		return false;
+	}
+}
+
+function isNewChrome () {
+    var pieces = navigator.userAgent.match(/Chrom(?:e|ium)\/([0-9]+)\.([0-9]+)\.([0-9]+)\.([0-9]+)/);
+    if (pieces == null || pieces.length != 5) {
+        return undefined;
+    }
+    major = pieces.map(piece => parseInt(piece, 10))[1];
+	if(major >= 76)
+		return true
+	return false;
+}
+
 var PrivateWindow = new Promise(function (resolve, reject) {
 	try {
 		var isSafari = navigator.vendor && navigator.vendor.indexOf('Apple') > -1 &&
@@ -33,6 +56,9 @@ var PrivateWindow = new Promise(function (resolve, reject) {
 			resolve(false);
 		} else {	//Normally ORP or Chrome
 			//Other
+			if(isNewChrome())
+				resolve(chrome76Detection());
+
 			const fs = window.RequestFileSystem || window.webkitRequestFileSystem;
 			if (!fs) resolve(null);
 			else {
