@@ -22,7 +22,7 @@ This works on:
 * Opera
 
 **iOS**
-* Safari
+* Safari <  iOS 13
 
 
 If the browser is not listed, then I have not tested it
