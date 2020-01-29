@@ -4,6 +4,8 @@
 
 Javascript used to check weather a users browser is in private mode or not
 
+Please note for this to work your website needs to be running on HTTPS. Ther eis no excuse for you not to be using SSL these days as its free and simple to get. (Ref: "CloudFlare" or "Let's Encrypt")
+
 
 This works on:
 
