@@ -23,10 +23,7 @@ function isNewChrome () {
 
 var PrivateWindow = new Promise(function (resolve, reject) {
 	try {
-		var isSafari = navigator.vendor && navigator.vendor.indexOf('Apple') > -1 &&
-			   navigator.userAgent &&
-			   navigator.userAgent.indexOf('CriOS') == -1 &&
-			   navigator.userAgent.indexOf('FxiOS') == -1;
+		var isSafari = navigator.vendor && navigator.vendor.indexOf('Apple') > -1;
 				 
 		if(isSafari){
 			//Safari
